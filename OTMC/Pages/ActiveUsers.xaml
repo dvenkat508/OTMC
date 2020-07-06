@@ -1,0 +1,47 @@
+﻿<Page x:Class="OTMC.Pages.ActiveUsers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OTMC.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ActiveUsers">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Center">
+            <TextBlock Text="Chats" FontSize="30" Foreground="White" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ListView Name="As">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Height="64" Background="Transparent" Margin="5,0,0,0">
+                                <Image Width="60" Height="60" VerticalAlignment="Center" Source="{Binding Img}">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
+                                    </Image.Clip>
+                                </Image>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="30,0,0,0">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="White"/>
+                                    <TextBlock Text="{Binding Email}" Foreground="White"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>                        
+                        <Style TargetType="ListViewItem">                            
+                            <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDown" />                            
+                        </Style>                        
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+                       
+    </Grid>
+</Page>

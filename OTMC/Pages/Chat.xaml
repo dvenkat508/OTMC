@@ -1,0 +1,102 @@
+﻿<Page x:Class="OTMC.Pages.Chat"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OTMC.Pages"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Chat" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="#FF1B3861">
+            <Frame x:Name="Users" Content="ActiveUsers.xaml" NavigationUIVisibility="Hidden" />            
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Name="sendgrid" Height="61"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#FF1368BD">
+                <StackPanel Orientation="Horizontal" Margin="5,5,0,5">
+                    <Image Name="User_Profile" Source="/OTMC;component/Images/Default_Profile_Pic.png">
+                        <Image.Clip>
+                            <EllipseGeometry Center="45,45" RadiusX="45" RadiusY="45"/>
+                        </Image.Clip>
+                    </Image>
+                    <Rectangle Width="10" Fill="Transparent"/>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="Name" FontWeight="Bold" Foreground="White" FontSize="40" Name="User_name"/>
+                        <TextBlock Text="Email" Foreground="White" Name="User_Email" FontSize="15"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Background="DarkGray">
+                <Frame x:Name="message" Content="MessagePage.xaml" NavigationUIVisibility="Hidden" x:FieldModifier="public"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Stretch" IsEnabled="False" x:Name="SendVissble">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="0,0,0,0" VerticalAlignment="Stretch" Grid.Column="0" >
+                    <Rectangle VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" RadiusX="25"  RadiusY="25" Fill="#FF2D89EF"/>
+                    <materialDesign:PopupBox PlacementMode="TopAndAlignLeftEdges" StaysOpen="False" Margin="0" Name="popup">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <TextBlock VerticalAlignment="Center" Height="25" Margin="16,0,17,0" Text="&#xE16C;" FontSize="25" HorizontalAlignment="Center" Background="Transparent" Name="Attach" FontFamily="Segoe MDL2 Assets" Foreground="White"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel Width="150">
+                            <Grid VerticalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="50" Margin="20,0,0,0" Text="&#xE114;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Width="100" Margin="-20,0,0,0" Text="Image" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Button VerticalAlignment="Stretch" Name="Attach_Image" HorizontalAlignment="Stretch" Click="Attach_Image_Click"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="50" Margin="20,0,0,0" Text="&#xE173;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Width="75" Margin="-20,0,0,0" Text="Video" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Button VerticalAlignment="Stretch" Name="Attach_Video" HorizontalAlignment="Stretch" Click="Attach_Video_Click"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="50" Margin="20,0,0,0" Text="&#xE189;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Width="75" Margin="-20,0,0,0" Text="Audio" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Button VerticalAlignment="Stretch" Name="Attach_Audio" HorizontalAlignment="Stretch" Click="Attach_Audio_Click"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="50" Margin="20,0,0,0" Text="&#xE160;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Width="75" Margin="-20,0,0,0" Text="Document" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Button VerticalAlignment="Stretch" Name="Attach_Document" Click="Attach_Document_Click" HorizontalAlignment="Stretch"/>
+                            </Grid>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </Grid>
+                <Grid Margin="5,5,0,5" Grid.Column="1" VerticalAlignment="Stretch">
+                    <Rectangle VerticalAlignment="Stretch" Stroke="Black" HorizontalAlignment="Stretch" RadiusX="20"  RadiusY="20" Fill="White"/>
+                    <TextBox VerticalAlignment="Stretch" Height="61" Margin="20,-21,20,0" Text="Enter Message" FontSize="25" HorizontalAlignment="Stretch" Background="Transparent" Foreground="DarkGray" BorderThickness="0" GotFocus="Inputblock_GotFocus" Name="Inputblock" LostFocus="Inputblock_LostFocus"/>
+                </Grid>
+                <Grid Margin="5,5,0,5" Grid.Column="2" VerticalAlignment="Stretch">
+                    <Grid>
+                        <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" RadiusX="20"  RadiusY="20" Fill="#FF2D89EF"/>
+                        <Button VerticalAlignment="Stretch" Height="61" Margin="35,-7,20,0" Content="Send" FontSize="25" HorizontalAlignment="Stretch" Background="Transparent" Foreground="White" BorderThickness="0"/>
+                        <Button Content="&#xE725;" FontFamily="Segoe MDL2 Assets" Height="61" Foreground="White" HorizontalAlignment="Left" FontSize="25" VerticalAlignment="Center" Margin="5,2,0,0" BorderThickness="0" Background="Transparent"/>
+                    </Grid>
+                    <Button Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Button_Click" BorderThickness="0" Height="61"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
